@@ -88,7 +88,7 @@ h3{
   
   /* When you mouse over the navigation links, change their color */
   .sidebar a:hover {
-    color: #d4c4d5;
+    color: #f5deb3;
   }
   
   /* Position and style the close button (top right corner) */
@@ -135,7 +135,7 @@ h3{
   }
 
   .welcome{
-    color: #615c62 !important;
+    color: #e18b6b !important;
     /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
     padding: 1vw;
     text-align: center;
