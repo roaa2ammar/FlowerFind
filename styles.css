@@ -50,6 +50,57 @@ h3{
     border-radius: 5%;
 }
 
+.login-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #666;
+}
+
+input[type="text"], input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.map{
+    font-size: 1.4vw;
+    width:80%;
+    background-color: #f7f3f1;
+    opacity: 80%;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: 2vw;
+    padding-top: 20vw;
+    border-radius: 5%;
+}
+
 .background-container{
     position: fixed;
     top: 0;

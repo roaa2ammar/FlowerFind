@@ -84,3 +84,60 @@ function openNav() {
     // Call the function to initially display user scores
     fetchUserScores();
 });
+
+document.getElementById("loginForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Prevent the form from submitting
+
+    // Get user input
+    const username = document.getElementById("username").value;
+    const password = document.getElementById("password").value;
+
+    // Perform authentication (this is where you would send the data to a server)
+
+    // For now, log the input to the console
+    console.log("Username:", username);
+    console.log("Password:", password);
+});
+
+const express = require('express');
+const bodyParser = require('body-parser');
+const bcrypt = require('bcrypt');
+const app = express();
+const saltRounds = 10;
+
+app.use(bodyParser.json());
+
+app.post('/register', (req, res) => {
+    const { username, password } = req.body;
+
+    // Hash the password before storing it in the database
+    bcrypt.genSalt(saltRounds, (err, salt) => {
+        bcrypt.hash(password, salt, (err, hash) => {
+            // Store 'username' and 'hash' in the database
+            // ...
+            res.send('User registered successfully!');
+        });
+    });
+});
+
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+
+    // Retrieve the hashed password and salt from the database based on 'username'
+
+    // Compare the entered password with the stored hash
+    bcrypt.compare(password, storedHash, (err, result) => {
+        if (result) {
+            // Passwords match, user is authenticated
+            res.send('Login successful!');
+        } else {
+            // Passwords do not match, authentication failed
+            res.status(401).send('Authentication failed');
+        }
+    });
+});
+
+app.listen(3000, () => {
+    console.log('Server started on port 3000');
+});
+
