@@ -47,3 +47,40 @@ function openNav() {
     document.getElementById("homeSidebar").style.width = "0";
     document.getElementById("main").style.marginLeft= "0";
   }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Functionality for login/signup form
+    // Add event listeners, handle form submissions, etc.
+
+    // Dummy data for scoreboard (replace with actual user data)
+    const scores = [
+        { username: "user1", score: 100 },
+        { username: "user2", score: 200 },
+        // Add more user scores as needed
+    ];
+
+    const scoreboardElement = document.getElementById("scoreboard");
+
+    // Function to display scores on the scoreboard
+    function displayScores() {
+        scoreboardElement.innerHTML = ""; // Clear previous scores
+        scores.forEach((user) => {
+            const userScoreElement = document.createElement("div");
+            userScoreElement.innerText = `${user.username}: ${user.score}`;
+            scoreboardElement.appendChild(userScoreElement);
+        });
+    }
+
+    // Dummy function to simulate fetching user scores from the server
+    function fetchUserScores() {
+        // Assume an API endpoint /api/scores returns user scores
+        // Make a fetch request to the server to get user scores
+        // Replace the following code with actual fetch request
+        setTimeout(() => {
+            displayScores();
+        }, 1000); // Simulating delay for API response (1 second)
+    }
+
+    // Call the function to initially display user scores
+    fetchUserScores();
+});

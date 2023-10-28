@@ -1,37 +1,46 @@
 <!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile</title>
-    <link href="styles.css" rel="stylesheet"/>
-   
+    <link href="styles.css" rel="stylesheet" />
 </head>
 
 <body>
-  <script src="profile.js"></script>
+    <script src="profile.js"></script>
     <div id="homeSidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="home.html">Home</a>
         <a href="profile.html">Profile</a>
         <a href="map.html">Map</a>
-      </div>
+    </div>
 
-      <div id="main">
+    <div id="main">
         <button class="openbtn" style="font-family: Agbalumo" onclick="openNav()">&#9776; Menu</button>
-      </div>
+    </div>
 
-      <h1 style="text-align: center; margin-top: 1vw; font-size:4.2vw;" id="welcome" class="welcome">Welcome to FlowerFind!</h1>
+    <div id="content">
+        <h1 id="welcome" class="welcome">Profile Settings</h1>
 
-      <div id="dropContainer" class="upload-container">
-        <div id="dropZone" class="upload">
-            <div class="uploadstext">
-                <span>Drag &amp; Upload your flower here!</span>
+        <div id="aboutthis" class="about">
+            <button id="loginBtn">Login</button>
+            <button id="signupBtn">Sign Up</button>
+        
+            <br>
+        
+            <h3>Scoreboard</h3>
+            <div id="scoreboard">
+                <!-- Display user scores here -->
             </div>
-            <input type="file" id="fileInput" class="file-input">
+        
+            <br>
+        
+            <h3>Change email address</h3>
+            <!-- Add change email form here -->
         </div>
     </div>
-  
 
 </body>
 

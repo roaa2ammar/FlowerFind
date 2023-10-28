@@ -9,18 +9,30 @@ body{
     height: 100%;
     font-family: "Agbalumo", sans-serif;
     background-color: #d4c4d5;
+    background-image: url('background.jpg');
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
     margin: 0;
     flex-direction: column;
-    margin-bottom: 5vw;
+    margin-bottom: 12vw;
     justify-content: space-between;
+    z-index: -1;
 }
 
 p{
     font-size: 1.4vw;
+}
+
+h1{
+    text-align: center; 
+    margin-top: 0vw; 
+    font-size: 4.2vw;
+}
+
+h3{
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 
@@ -36,6 +48,18 @@ p{
     margin-left: 2vw;
     padding: 2vw;
     border-radius: 5%;
+}
+
+.background-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    object-fit: cover;
+    opacity: 0.3; 
+ 
 }
 
 /* The sidebar menu */
@@ -111,8 +135,8 @@ p{
   }
 
   .welcome{
-    color: #cde2b8 !important;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: #615c62 !important;
+    /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
     padding: 1vw;
     text-align: center;
     transform: scale(0);
