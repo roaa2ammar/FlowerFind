@@ -4,12 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Flower Find</title>
+    <script src="https://kit.fontawesome.com/8371c596d2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href= "{{ url_for('static',filename='styles.css') }}"/>
    
 </head>
 
 <body>
-  <script src="{{ url_for('static', filename='home.js') }}""></script>
     <div id="homeSidebar" class="sidebar">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="profile.html">Profile</a>
@@ -24,15 +24,19 @@
  
       <h1 id="welcome" class="welcome">Welcome to FlowerFind!</h1>
 
-      <div id="dropContainer" class="upload-container">
-        <div id="dropZone" class="upload">
-            <div class="uploadstext">
-                <span>Drag &amp; Upload your flower here!</span>
-            </div>
-            <form action = "{{ url_for('predict')}}" method="post">
-              <input type="file" id="fileInput" class="file-input" name="image">
-            </form>
-        </div>
+      <div class="drag-area">
+        <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
+        <header>Drag & Drop to Upload File</header>
+        <span>OR</span>
+        <button>Browse File</button>
+        <input type="file" name="file" id="file" hidden>
+      </div>
+
+      <script src="{{ url_for('static', filename='home.js') }}"></script>
+
+     
+
+      
     </div>
   
 
