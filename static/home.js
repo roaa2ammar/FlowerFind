@@ -69,61 +69,51 @@ function showFile(){
 function upload_file(e) {
     e.preventDefault();
     fileobj = e.dataTransfer.files[0];
-    // js_file_upload(fileobj);
+    js_file_upload(fileobj);
+
+    
 }
 
 function file_browse() {
   document.getElementById('file').onchange = function() {
       fileobj = document.getElementById('file').files[0];
-      // js_file_upload(fileobj);
+      js_file_upload(fileobj);
+
   };
 }
+$(document).ready(function () {
+  $('#predictButton').on('click', function () {
+      // Call the ML model by making an AJAX request
+      $.ajax({
+          url: '/predict',  // Update the URL to your Flask route for ML prediction
+          method: 'GET',    // Use the appropriate HTTP method
+          success: function (response) {
+              // Handle the prediction result received from the server
+              $('#predictionResult').text('Prediction: ' + response);
+          }
+      });
+  });
+});
 
+// function js_file_upload(file_obj) {
+//   if(file_obj != undefined) {
+//       var form_data = new FormData();                  
+//       form_data.append('file', file_obj);
+//       var xhttp = new XMLHttpRequest();
+//       xhttp.open("POST", "/upload", true);
+//       xhttp.onload = function(event) {
+         
+//           if (xhttp.status == 200) {
+//               console.log("Uploaded!");
+//           } else {
+//              alert(xhttp.status);
+//           }
+//       }
+
+//       xhttp.send(form_data);
+//   }
+// }
  
-
-// document.addEventListener("DOMContentLoaded", function() {
-    
-   
-//     // dropContainer.addEventListener("dragover", function(e) {
-//     //     e.preventDefault();
-//     //     dropZone.classList.add('highlight');
-//     // });
-
-//     // dropContainer.addEventListener("dragleave", function() {
-//     //     dropZone.classList.remove('highlight');
-//     // });
-
-//     // dropContainer.addEventListener("drop", function(e) {
-//     //     e.preventDefault();
-//     //     dropZone.classList.remove('highlight');
-
-//     //     const files = e.dataTransfer.files;
-//     //     handleFiles(files);
-//     // });
-
-//     // fileInput.addEventListener("change", function() {
-//     //     const files = fileInput.files;
-//     //     handleFiles(files);
-//     // });
-
-//     // function handleFiles(files) {
-//     //     const uploadedImage = document.getElementById('uploadedImage');
-//     //     const dropContainer = document.getElementById('dropContainer');
-    
-      
-//     //         // Set the src attribute of the img element to display the uploaded image
-//     //         uploadedImage.src = URL.createObjectURL(files);
-    
-//     //         // Append the image to the dropContainer
-//     //         dropContainer.appendChild(uploadedImage);
-        
-        
-
-//     //     // Handle the dropped or selected files here
-//     //     console.log(files);
-//     //     // You can add further processing for the files, such as uploading to a server or displaying them on the page.
-//     // }
-// });
 
 function openNav() {
     document.getElementById("homeSidebar").style.width = "250px";
