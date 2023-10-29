@@ -1,0 +1,245 @@
+@font-face{
+    font-family: "Agbalumo";
+    src: url(Agbalumo/Agbalumo-Regular.ttf) format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    height: 100%;
+    font-family: "Agbalumo", sans-serif;
+    background-color: #d4c4d5;
+    background-image: url('background.jpg');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+    margin-bottom: 12vw;
+    justify-content: space-between;
+    z-index: -1;
+}
+
+p{
+    font-size: 1.4vw;
+}
+
+h1{
+    text-align: center; 
+    margin-top: 0vw; 
+    font-size: 4.2vw;
+}
+
+h3{
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+
+.about{
+    font-size: 1.4vw;
+    width:80%;
+    background-color: #f7f3f1;
+    opacity: 80%;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: 2vw;
+    padding: 2vw;
+    border-radius: 5%;
+}
+
+.login-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #666;
+}
+
+input[type="text"], input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.map{
+    font-size: 1.4vw;
+    width:80%;
+    background-color: #f7f3f1;
+    opacity: 80%;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-left: 2vw;
+    padding-top: 20vw;
+    border-radius: 5%;
+}
+
+.background-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 0;
+    object-fit: cover;
+    opacity: 0.3; 
+ 
+}
+
+/* The sidebar menu */
+.sidebar {
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 5vw; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidebar */
+  }
+  
+  /* The sidebar links */
+  .sidebar a {
+    padding: 0.8vw 0.8vw 0.8vw 5vw;
+    text-decoration: none;
+    font-size: 2.2vw;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .sidebar a:hover {
+    color: #f5deb3;
+  }
+  
+  /* Position and style the close button (top right corner) */
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 5vw;
+    font-size: 3.2vw;
+    margin-left: 10vw;
+  }
+  
+  /* The button used to open the sidebar */
+  .openbtn {
+    font-size: 1.5vw;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 1vw 1.5vw;
+    border: none;
+    margin-right: 65vw;
+  }
+  
+  .openbtn:hover {
+    background-color: #444;
+  }
+  
+  /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+  #main {
+    transition: margin-left .5s; /* If you want a transition effect */
+    padding: 1vw;
+  }
+  
+  @keyframes fadeInAndPoP{
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 0.8;
+    }
+    100%{
+        opacity: 0.9;
+    }
+    
+  }
+
+  .welcome{
+    color: #e18b6b !important;
+    /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
+    padding: 1vw;
+    text-align: center;
+    transform: scale(0);
+    animation: fadeInAndPop 1s ease;
+    animation-duration: 6s;
+    
+  }
+
+  .upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 30vw;
+    height: 30vw;
+    border: 2px dashed #3498db;
+    border-radius: 10px;
+}
+
+.upload {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: #DDDDDA;
+    border-radius: 10px;
+}
+
+.uploadstext {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    opacity: 0.7;
+}
+
+.uploadstext span {
+    font-size: 1.4vw;
+    margin-top: 0.1vw;
+}
+
+.upload.highlight {
+    background-color: #f7f3f1;
+}
+
+/* .file-input {
+    display: none;
+} */
+
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) {
+    .sidebar {padding-top: 1.5vw;}
+    .sidebar a {font-size: 1.8vw;}
+  }
