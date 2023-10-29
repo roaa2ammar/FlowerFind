@@ -32,7 +32,7 @@ h1{
 }
 
 h3{
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 4px white;
 }
 
 
@@ -40,7 +40,7 @@ h3{
     font-size: 1.4vw;
     width:80%;
     background-color: #f7f3f1;
-    opacity: 80%;
+    opacity: 90%;
     display: block;
     justify-content: center;
     align-items: center;
