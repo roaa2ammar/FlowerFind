@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #search-container {
+        display: flex;
+        margin-bottom: 10px;
+      }
+
+      #pac-input {
+        flex: 1;
+        width: 70%;
+        padding: 10px;
+        font-size: 16px;
+      }
+
+      #search-button {
+        width: 30%;
+        padding: 10px;
+        font-size: 16px;
+      }
+
+    </style>
+  </head>
+
+<body>
+
+    <h1>My First Google Map</h1>
+
+    <!-- Input field for Places search box -->
+    <div id="search-container">
+      <input id="pac-input" type="text" placeholder="Enter an address">
+      <button id="search-button">Find Address</button>
+    </div>
+  
+    <!-- set the size of the map -->
+    <div id="googleMap" style="width: 100%; height: 700px;"></div>
+
+    <script>
+        var map;
+        var marker; // Variable to store the marker
+
+        function initAutocomplete() {
+            map = new google.maps.Map(document.getElementById("googleMap"), {
+                center: { lat: -33.8688, lng: 151.2195 },
+                zoom: 13,
+                mapTypeId: "roadmap",
+            });
+
+            const input = document.getElementById("pac-input");
+            const searchBox = new google.maps.places.SearchBox(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+            map.addListener("bounds_changed", () => {
+                searchBox.setBounds(map.getBounds());
+            });
+
+            searchBox.addListener("places_changed", () => {
+                const places = searchBox.getPlaces();
+
+                if (places.length == 0) {
+                    return;
+                }
+
+                const place = places[0]; // Get the first place from the search results
+
+                // Remove existing marker if it exists
+                if (marker) {
+                    marker.setMap(null);
+                }
+
+                // Set the new marker
+                marker = new google.maps.Marker({
+                    map,
+                    title: place.name,
+                    position: place.geometry.location,
+                });
+
+                map.panTo(place.geometry.location); // Pan the map to the new marker
+            });
+        }
+
+        function myMap() {
+            initAutocomplete();
+
+            // Add event listener for the "Find Address" button click
+            document.getElementById("search-button").addEventListener("click", function() {
+                // Trigger a Places search when the button is clicked
+                const places = new google.maps.places.PlacesService(map);
+                const request = {
+                    query: document.getElementById("pac-input").value,
+                    fields: ['name', 'geometry'],
+                };
+                places.findPlaceFromQuery(request, function(results, status) {
+                    if (status === google.maps.places.PlacesServiceStatus.OK && results.length > 0) {
+                        const place = results[0];
+                        // Remove existing marker if it exists
+                        if (marker) {
+                            marker.setMap(null);
+                        }
+                        // Set the new marker
+                        marker = new google.maps.Marker({
+                            map,
+                            title: place.name,
+                            position: place.geometry.location,
+                        });
+                        map.panTo(place.geometry.location); // Pan the map to the new marker
+                    } else {
+                        console.log("Place not found");
+                    }
+                });
+            });
+        }
+    </script>
+
+    <!-- Replace 'YOUR_API_KEY' with your actual Google Maps API key -->
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw1ZhTibkKJE-OFzAo-XUgZJ7Tc2oLt4I&callback=myMap&libraries=places"
+    async defer></script>
+
+</body>
+</html>

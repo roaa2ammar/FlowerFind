@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        #search-container {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        #pac-input {
+            flex: 1;
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        #search-button {
+            width: 30%;
+            padding: 10px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>My First Google Map</h1>
+    <div id="search-container">
+        <input id="pac-input" type="text" placeholder="Enter an address">
+        <button id="search-button">Find Address</button>
+    </div>
+    <div id="googleMap" style="width: 100%; height: 700px;"></div>
+
+    <script>
+        var map;
+        var markers = [];
+        var infowindow;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("googleMap"), {
+                center: { lat: -33.8688, lng: 151.2195 },
+                zoom: 13,
+                mapTypeId: "roadmap",
+            });
+
+            infowindow = new google.maps.InfoWindow();
+
+            const input = document.getElementById("pac-input");
+            const searchBox = new google.maps.places.SearchBox(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+            map.addListener("bounds_changed", () => {
+                searchBox.setBounds(map.getBounds());
+            });
+
+            searchBox.addListener("places_changed", () => {
+                const places = searchBox.getPlaces();
+
+                if (places.length == 0) {
+                    return;
+                }
+
+                markers.forEach((marker) => {
+                    marker.setMap(null);
+                });
+                markers = [];
+
+                const bounds = new google.maps.LatLngBounds();
+
+                places.forEach((place) => {
+                    if (!place.geometry || !place.geometry.location) {
+                        console.log("Returned place contains no geometry");
+                        return;
+                    }
+
+                    markers.push(
+                        new google.maps.Marker({
+                            map,
+                            title: place.name,
+                            position: place.geometry.location,
+                        })
+                    );
+
+                    google.maps.event.addListener(markers[markers.length - 1], "click", function () {
+                        infowindow.setContent(place.name);
+                        infowindow.open(map, markers[markers.length - 1]);
+                    });
+
+                    if (place.geometry.viewport) {
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                map.fitBounds(bounds);
+            });
+        }
+
+        function saveMarker(lat, lng) {
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "saveMarker.php", true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    console.log("Marker saved successfully!");
+                }
+            };
+            xhr.send("lat=" + lat + "&lng=" + lng);
+        }
+
+        function loadMarkers() {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "loadMarkers.php", true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var markersData = JSON.parse(xhr.responseText);
+                    markersData.forEach(function(markerData) {
+                        var marker = new google.maps.Marker({
+                            position: { lat: parseFloat(markerData.lat), lng: parseFloat(markerData.lng) },
+                            map: map
+                        });
+                        markers.push(marker);
+                    });
+                }
+            };
+            xhr.send();
+        }
+
+        function myMap() {
+            initMap();
+            loadMarkers();
+
+            google.maps.event.addListener(map, "click", function(event) {
+                var location = event.latLng;
+                var marker = new google.maps.Marker({
+                    position: location,
+                    map: map
+                });
+                markers.push(marker);
+                infowindow.setContent("Latitude: " + location.lat() + "<br>Longitude: " + location.lng());
+                infowindow.open(map, marker);
+                saveMarker(location.lat(), location.lng());
+            });
+        }
+    </script>
+
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAw1ZhTibkKJE-OFzAo-XUgZJ7Tc2oLt4I&callback=myMap&libraries=places"
+    async defer></script>
+</body>
+</html>
