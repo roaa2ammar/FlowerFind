@@ -1,9 +1,13 @@
+
+
+//Home page title effect (not working yet)
 document.addEventListener("DOMContentLoaded", function(){
     const heading = document.querySelector('.welcome');
     heading.style.color= "black";
     heading.style.transform= "scale(1)";
 });
 
+//Drop effect or uploading flowers
 document.addEventListener("DOMContentLoaded", function() {
     const dropContainer = document.getElementById("dropContainer");
     const dropZone = document.getElementById("dropZone");
@@ -38,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+//Menu open and close
 function openNav() {
     document.getElementById("homeSidebar").style.width = "250px";
     document.getElementById("main").style.marginLeft = "250px";

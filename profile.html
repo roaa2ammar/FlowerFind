@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile</title>
     <link href="styles.css" rel="stylesheet" />
+    <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+    <script src="bower_components/firebaseui/dist/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="bower_components/firebaseui/dist/firebaseui.css" />
 </head>
 
 <body>
@@ -15,6 +19,7 @@
         <a href="home.html">Home</a>
         <a href="map.html">Map</a>
         <a href="about.html">About</a>
+        <a href="terms.html">Our Terms</a>
     </div>
 
     <div id="main">
@@ -23,35 +28,37 @@
 
     <div id="content">
         <h1 id="welcome" class="welcome">Profile Settings</h1>
-
-        <div class="login-container">
-            <h2>Login</h2>
-            <form id="loginForm">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required><br>
+        <div id="firebaseui-auth-container"></div>
+        <div id="loader">Loading...</div>
     
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required><br>
+        <!-- <div class="login-container"> -->
+            <!-- <h2>Login</h2> -->
+            <!-- <form id="loginForm"> -->
+                <!-- <label for="username">Username:</label> -->
+                <!-- <input type="text" id="username" name="username" required><br> -->
     
-                <button type="submit">Login</button>
-            </form>
-        </div>
-        <div id="profilethis" class="about">
-            <button id="loginBtn">Login</button>
-            <button id="signupBtn">Sign Up</button>
+                <!-- <label for="password">Password:</label> -->
+                <!-- <input type="password" id="password" name="password" required><br> -->
+    
+                <!-- <button type="submit">Login</button> -->
+            <!-- </form> -->
+        <!-- </div> -->
+        <!-- <div id="profilethis" class="about"> -->
+            <!-- <button id="loginBtn">Login</button> -->
+            <!-- <button id="signupBtn">Sign Up</button> -->
         
-            <br>
+            <!-- <br> -->
         
-            <h3>Scoreboard</h3>
-            <div id="scoreboard">
+            <!-- <h3>Scoreboard</h3> -->
+            <!-- <div id="scoreboard"> -->
                 <!-- Display user scores here -->
-            </div>
+            <!-- </div> -->
         
-            <br>
+            <!-- <br> -->
         
-            <h3>Change email address</h3>
+            <!-- <h3>Change email address</h3> -->
             <!-- Add change email form here -->
-        </div>
+        <!-- </div> -->
     </div>
 
 </body>

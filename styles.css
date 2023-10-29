@@ -16,7 +16,7 @@ body{
     height: 100vh;
     margin: 0;
     flex-direction: column;
-    margin-bottom: 12vw;
+    margin-bottom: 33vw;
     justify-content: space-between;
     z-index: -1;
 }
@@ -48,6 +48,7 @@ h3{
     margin-left: 2vw;
     padding: 2vw;
     border-radius: 5%;
+    margin-bottom: -6vw;
 }
 
 .login-container {

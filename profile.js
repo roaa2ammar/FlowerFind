@@ -1,43 +1,143 @@
+//Login features
+
+// Firebase configuration
+var firebaseConfig = {
+    apiKey: "YOUR_API_KEY",
+    authDomain: "your-app.firebaseapp.com",
+    projectId: "your-app",
+    storageBucket: "your-app.appspot.com",
+    messagingSenderId: "123456789",
+    appId: "1:123456789:web:abcdef123456"
+  };
+  
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  
+// Initialize the FirebaseUI Widget using Firebase
+var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+var firebase = require('firebase');
+var firebaseui = require('firebaseui');
+
+ui.start('#firebaseui-auth-container', {
+    signInOptions: [
+      firebase.auth.EmailAuthProvider.PROVIDER_ID
+    ],
+    // Other config options...
+  });
+
+  ui.start('#firebaseui-auth-container', {
+    signInOptions: [
+      {
+        provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+        signInMethod: firebase.auth.EmailAuthProvider.EMAIL_LINK_SIGN_IN_METHOD
+      }
+    ],
+    // Other config options...
+  });
+
+  // Is there an email link sign-in?
+if (ui.isPendingRedirect()) {
+    ui.start('#firebaseui-auth-container', uiConfig);
+  }
+  // This can also be done via:
+  if (firebase.auth().isSignInWithEmailLink(window.location.href)) {
+    ui.start('#firebaseui-auth-container', uiConfig);
+  }
+
+  ui.start('#firebaseui-auth-container', {
+    signInOptions: [
+      // List of OAuth providers supported.
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+      firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+      firebase.auth.GithubAuthProvider.PROVIDER_ID
+    ],
+    // Other config options...
+  });
+
+  var uiConfig = {
+    callbacks: {
+      signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+        // User successfully signed in.
+        // Return type determines whether we continue the redirect automatically
+        // or whether we leave that to developer to handle.
+        return true;
+      },
+      uiShown: function() {
+        // The widget is rendered.
+        // Hide the loader.
+        document.getElementById('loader').style.display = 'none';
+      }
+    },
+    // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+    signInFlow: 'popup',
+    signInSuccessUrl: '<url-to-redirect-to-on-success>',
+    signInOptions: [
+      // Leave the lines as is for the providers you want to offer your users.
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+      firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+      firebase.auth.GithubAuthProvider.PROVIDER_ID,
+      firebase.auth.EmailAuthProvider.PROVIDER_ID,
+      firebase.auth.PhoneAuthProvider.PROVIDER_ID
+    ],
+    // Terms of service url.
+    tosUrl: '<your-tos-url>',
+    // Privacy policy url.
+    privacyPolicyUrl: '<your-privacy-policy-url>'
+  };
+
+  // The start method will wait until the DOM is loaded.
+ui.start('#firebaseui-auth-container', uiConfig);
+
+// Temp variable to hold the anonymous user data if needed.
+var data = null;
+// Hold a reference to the anonymous current user.
+var anonymousUser = firebase.auth().currentUser;
+ui.start('#firebaseui-auth-container', {
+  // Whether to upgrade anonymous users should be explicitly provided.
+  // The user must already be signed in anonymously before FirebaseUI is
+  // rendered.
+  autoUpgradeAnonymousUsers: true,
+  signInSuccessUrl: '<url-to-redirect-to-on-success>',
+  signInOptions: [
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+    firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    firebase.auth.PhoneAuthProvider.PROVIDER_ID
+  ],
+  callbacks: {
+    // signInFailure callback must be provided to handle merge conflicts which
+    // occur when an existing credential is linked to an anonymous user.
+    signInFailure: function(error) {
+      // For merge conflicts, the error.code will be
+      // 'firebaseui/anonymous-upgrade-merge-conflict'.
+      if (error.code != 'firebaseui/anonymous-upgrade-merge-conflict') {
+        return Promise.resolve();
+      }
+      // The credential the user tried to sign in with.
+      var cred = error.credential;
+      // Copy data from anonymous user to permanent user and delete anonymous
+      // user.
+      // ...
+      // Finish sign-in after data is copied.
+      return firebase.auth().signInWithCredential(cred);
+    }
+  }
+});
+
+
+
+
+//Home page title effect (not working yet)
 document.addEventListener("DOMContentLoaded", function(){
     const heading = document.querySelector('.welcome');
     heading.style.color= "black";
     heading.style.transform= "scale(1)";
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-    const dropContainer = document.getElementById("dropContainer");
-    const dropZone = document.getElementById("dropZone");
-    const fileInput = document.getElementById("fileInput");
-
-    dropContainer.addEventListener("dragover", function(e) {
-        e.preventDefault();
-        dropZone.classList.add('highlight');
-    });
-
-    dropContainer.addEventListener("dragleave", function() {
-        dropZone.classList.remove('highlight');
-    });
-
-    dropContainer.addEventListener("drop", function(e) {
-        e.preventDefault();
-        dropZone.classList.remove('highlight');
-
-        const files = e.dataTransfer.files;
-        handleFiles(files);
-    });
-
-    fileInput.addEventListener("change", function() {
-        const files = fileInput.files;
-        handleFiles(files);
-    });
-
-    function handleFiles(files) {
-        // Handle the dropped or selected files here
-        console.log(files);
-        // You can add further processing for the files, such as uploading to a server or displaying them on the page.
-    }
-});
-
+//Menu open and close
 function openNav() {
     document.getElementById("homeSidebar").style.width = "250px";
     document.getElementById("main").style.marginLeft = "250px";
@@ -47,6 +147,8 @@ function openNav() {
     document.getElementById("homeSidebar").style.width = "0";
     document.getElementById("main").style.marginLeft= "0";
   }
+
+
 
   document.addEventListener("DOMContentLoaded", function () {
     // Functionality for login/signup form
