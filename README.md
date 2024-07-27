@@ -13,3 +13,7 @@ A significant challenge was testing the model during its training phase, leading
 
 ## Accomplishments that we're proud of:
 We're proud of creating FloraFy, a tool that bridges technology and environmental conservation. Building a functional system integrating AI and geolocation services was a significant achievement, fostering community engagement in preserving biodiversity.
+
+## Built With
+
+`CSS` `Firebase` `Flask` `Google Cloud` `Google Maps API` `HTML` `JavaScript` `Keras` `Matplotlib` `NumPy` `Pandas` `Pickle` `Python` `Scikit-learn` `TensorFlow` `tqdm`
